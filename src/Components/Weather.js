@@ -14,16 +14,16 @@ const [windDegree, setWindDegree] = useState(0);
 
 useEffect(() => {
 navigator.geolocation.getCurrentPosition((position) => {
-axios.get(`https:api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&cnt=${7}&units=metric&appid=${apiKey}`)
+axios.get(`https:api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&cnt=${7}&units=metric&appid=${apiKey}`)
 .then((response) => {
 console.log(response);
 setName(response.data.name)
-setIcon(response.data.weather[0].icon);
-setIconDescrib(response.data.weather[0].description);
-setTemp(response.data.main.temp);
-setHumidity(response.data.main.humidity);
-setWindSpeed(response.data.wind.speed);
-setWindDegree(response.data.wind.deg);
+setIcon(response.data.list[0].weather[0].icon);
+setIconDescrib(response.data.list[0].weather[0].description);
+setTemp(response.data.list[0].main.temp);
+setHumidity(response.data.list[0].main.humidity);
+setWindSpeed(response.data.list[0].wind.speed);
+setWindDegree(response.data.list[0].wind.deg);
 })
 });
 }, []);
