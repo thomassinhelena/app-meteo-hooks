@@ -15,7 +15,7 @@ const [list, setList] = useState([]);
 
 useEffect(() => {
   navigator.geolocation.getCurrentPosition((position) => {
-    axios.get(`https:api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&cnt=${7}&units=metric&appid=${apiKey}`)
+    axios.get(`https:api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&cnt=${30}&units=metric&appid=${apiKey}`)
     .then((response) => {
       console.log(response);
       setName(response.data.city.name)
@@ -32,7 +32,11 @@ useEffect(() => {
 
 return (
   <Fragment>
-    {list.map((item, index) => {
+    {list
+    .filter((item) => {
+      return item.dt_txt.includes("12:00");
+    })
+    .map((item, index) => {
       return(
         <div key={index}>
           <h2>{name}</h2>
@@ -41,6 +45,7 @@ return (
             <p>{item.main.temp}°C </p>
             <p>{item.main.humidity}% </p>
             <img src={`${process.env.PUBLIC_URL}/Assets/Images/map-arrow-png-1.png`}width="100px" style={{transform: `rotate(${item.wind.degree}deg)`}} />
+            <p>{item.dt_txt}</p>
         </div>
       )
     })}
