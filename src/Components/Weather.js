@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import apiKey from '../Config';
 import axios from 'axios';
+import './Weather.css';
 
 const Weather = () => {
 const [name, setName] = useState('');
@@ -38,14 +39,16 @@ return (
     })
     .map((item, index) => {
       return(
-        <div key={index}>
-          <h2>{name}</h2>
+        <div key={index} className="card card-weather">
+          <div className="card-body">
+            <h2>{name}</h2>
             <img src={`https://openweathermap.org/img/wn/10n@2x.png`} alt={iconDescrib} />
-            <p>{item.wind.speed*3.6}Km/h </p>
+            <p>{Math.floor(item.wind.speed*3.6)} Km/h </p>
             <p>{item.main.temp}°C </p>
             <p>{item.main.humidity}% </p>
             <img src={`${process.env.PUBLIC_URL}/Assets/Images/map-arrow-png-1.png`}width="100px" style={{transform: `rotate(${item.wind.degree}deg)`}} />
             <p>{item.dt_txt}</p>
+          </div>
         </div>
       )
     })}
