@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import apiKey from '../Config';
 import axios from 'axios';
+import moment from 'moment';
 import './Weather.css';
 
 const Weather = () => {
@@ -47,7 +48,7 @@ return (
             <p>{item.main.temp}°C </p>
             <p>{item.main.humidity}% </p>
             <img src={`${process.env.PUBLIC_URL}/Assets/Images/map-arrow-png-1.png`}width="100px" style={{transform: `rotate(${item.wind.degree}deg)`}} />
-            <p>{item.dt_txt}</p>
+            <p>{moment(item.dt_txt).format("dddd Do MMM YYYY")}</p>
           </div>
         </div>
       )
