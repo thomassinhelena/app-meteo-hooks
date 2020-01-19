@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Fragment } from 'react';
+import apiKey from '../Config';
 import axios from 'axios';
 
 const Weather = () => {
-const apiKey = "4adb4c344ad7f0052e9870e7b3d2ca51";
 const [name, setName] = useState('');
 const [icon, setIcon] = useState('');
 const [iconDescrib, setIconDescrib] = useState('');
